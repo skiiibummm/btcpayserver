@@ -68,6 +68,7 @@ using Serilog;
 #if ALTCOINS
 using BTCPayServer.Services.Altcoins.Monero;
 using BTCPayServer.Services.Altcoins.Zcash;
+using BTCPayServer.Services.Altcoins.Wownero;
 #endif
 namespace BTCPayServer.Hosting
 {
@@ -112,6 +113,8 @@ namespace BTCPayServer.Hosting
                 services.AddMoneroLike();
             if (configuration.SupportChain("yec") || configuration.SupportChain("zec"))
                 services.AddZcashLike();
+            if (configuration.SupportChain("wow"))
+                services.AddWowneroLike();
 #endif
             services.AddScoped<IScopeProvider, ScopeProvider>();
             services.TryAddSingleton<SettingsRepository>();
