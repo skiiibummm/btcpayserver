@@ -83,6 +83,8 @@ namespace BTCPayServer.Payments
                 return CryptoCode;
             if ((CryptoCode == "YEC" || CryptoCode == "ZEC") && PaymentType == PaymentTypes.ZcashLike)
                 return CryptoCode;
+            if (CryptoCode == "WOW" && PaymentType == PaymentTypes.WowneroLike)
+                return CryptoCode;
 #endif
             return $"{CryptoCode}-{PaymentType.ToStringNormalized()}";
         }
@@ -110,6 +112,8 @@ namespace BTCPayServer.Payments
                 type = PaymentTypes.MoneroLike;
             if (parts[0].ToUpperInvariant() == "ZEC")
                 type = PaymentTypes.ZcashLike;
+            if (parts[0].ToUpperInvariant() == "WOW")
+                type = PaymentTypes.WowneroLike;
 #endif
             if (parts.Length == 2)
             {
