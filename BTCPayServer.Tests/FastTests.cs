@@ -221,6 +221,12 @@ namespace BTCPayServer.Tests
             Assert.Equal(id, id1);
             Assert.Equal("XMR_MoneroLike", id.ToString());
             Assert.Equal("XMR", id.ToStringNormalized());
+
+            id = PaymentMethodId.Parse("WOW");
+            id1 = PaymentMethodId.Parse("WOW-WowneroLike");
+            Assert.Equal(id, id1);
+            Assert.Equal("WOW_WowneroLike", id.ToString());
+            Assert.Equal("WOW", id.ToStringNormalized());
 #endif
         }
 
