@@ -1,0 +1,22 @@
+@using BTCPayServer.Services.Altcoins.Wownero.Configuration
+@using BTCPayServer.Services.Altcoins.Wownero.UI
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using BTCPayServer.Client
+@using BTCPayServer.Abstractions.TagHelpers
+@using BTCPayServer.Abstractions.Contracts
+@inject WowneroLikeConfiguration WowneroLikeConfiguration;
+@inject IScopeProvider ScopeProvider
+@{
+    var storeId = ScopeProvider.GetCurrentStoreId();
+    var isActive = !string.IsNullOrEmpty(storeId) && ViewContext.RouteData.Values.TryGetValue("Controller", out var controller) && controller is not null && 
+                   nameof(UIMoneroLikeStoreController).StartsWith(controller.ToString() ?? string.Empty, StringComparison.InvariantCultureIgnoreCase);
+}
+@if (WowneroLikeConfiguration.WowneroLikeConfigurationItems.Any())
+{
+    <li class="nav-item" permission="@Policies.CanModifyStoreSettings">
+        <a asp-action="GetStoreWowneroLikePaymentMethods" asp-controller="UIWowneroLikeStore" asp-route-storeId="@storeId" class="nav-link @(isActive ? "active" : string.Empty)" id="StoreNav-Wownero">
+            <span class="me-2 btcpay-status"></span>
+            <span>Wownero</span>
+        </a>
+    </li>
+}
